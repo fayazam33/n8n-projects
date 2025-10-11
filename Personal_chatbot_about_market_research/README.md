@@ -1,9 +1,7 @@
 # 🤖 Personal Chatbot for Market Research (n8n + Telegram + Gemini)
 ## 🌀 Quick Preview
 
-<p align="center">
-  <img src="./demo/demo.gif" alt="Telegram Bot Demo" width="600" />
-</p>
+![Telegram Bot Demo](.//Fayaz_bot_video.gif)
 
 This workflow is an AI-powered chatbot that provides **market research insights ** to users via Telegram.
 
