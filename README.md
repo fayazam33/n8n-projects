@@ -10,14 +10,23 @@ Each project is designed to solve real-world problems efficiently.
 ## 📌 Repository Structure
 n8n-projects/
 │
+
 ├── 📁 project-name-1/
+
 │ ├── README.md
+
 │ └── workflow.json
+
 │
+
 ├── 📁 project-name-2/
+
 │ ├── README.md
+
 │ └── workflow.json
+
 │
+
 └── ...
 
 Each project folder contains:
