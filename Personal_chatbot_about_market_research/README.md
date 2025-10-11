@@ -1,6 +1,9 @@
 # 🤖 Personal Chatbot for Market Research (n8n + Telegram + Gemini)
+## 🌀 Quick Preview
 
-This workflow is an AI-powered chatbot that provides **market research insights in Bangla** to Bangladeshi users via Telegram.
+![Telegram Bot Demo](.//Fayaz_bot_video.gif)
+
+This workflow is an AI-powered chatbot that provides **market research insights ** to users via Telegram.
 
 ## ✨ Features
 - 🧠 AI analysis using Gemini
