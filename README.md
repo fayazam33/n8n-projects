@@ -35,11 +35,6 @@ Each project folder contains:
 - Any related assets (e.g., GIF demos, images, documentation)
 
 
-## 🛠 How to Use
-
-1. **Clone this repository**:
-   ```bash
-   git clone https://github.com/your-username/n8n-projects.git
-
+The owner of this repo is - Fayaz Ali Muktadir
 
 
