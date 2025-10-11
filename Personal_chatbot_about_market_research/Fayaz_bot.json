@@ -1,0 +1,212 @@
+{
+  "name": "Fayaz_bot",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -768,
+        -176
+      ],
+      "id": "08043c23-ea50-4275-9abf-4a263217605c",
+      "name": "Telegram Trigger",
+      "webhookId": "77bc265f-0bf1-4d79-a9f9-26b7f8e63fe1",
+      "credentials": {
+        "telegramApi": {
+          "id": "qjXGXGdSmI8P4OUP",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=this is the user prompt context {{ $json.message.text }}",
+        "options": {
+          "systemMessage": "You are an AI-powered market research agent, designed specifically for Bangladeshi users.\nYour job is to gather, analyze, and summarize relevant market insights based on the user’s input topic. if anyone say hello start with Assalamualaikum greetings\nAll responses must be written in Bangla.\n\nYour answers should be clear, structured, and data-driven, focusing on the following key areas:\n\n🎯 Target Audience Analysis — Include demographics (age, gender, income, location), behaviors, interests, and pain points.\n\n🧭 Market Trends & Demand — Provide insights on the current market landscape in Bangladesh, growth potential, and future opportunities.\n\n🏆 Competitor Analysis — Identify key competitors, their offerings, pricing, marketing strategies, and weaknesses.\n\n💡 Key Insights & Recommendations — Deliver data-backed conclusions and practical action steps.\n\nAvoid unnecessary fluff. The response should be useful for business decision-making."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -544,
+        -176
+      ],
+      "id": "fe687027-ce8e-4eb8-80d0-59a1aa3542b5",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -688,
+        32
+      ],
+      "id": "c0d2bb76-c0aa-44a6-9578-eee2ad73b61e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "9fGBAboNdfXa68TT",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appqSNHZttED3igBu",
+          "mode": "list",
+          "cachedResultName": "fayaz_bot",
+          "cachedResultUrl": "https://airtable.com/appqSNHZttED3igBu"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblOwcYV14EIgODle",
+          "mode": "list",
+          "cachedResultName": "fayaz",
+          "cachedResultUrl": "https://airtable.com/appqSNHZttED3igBu/tblOwcYV14EIgODle"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "topics": "={{ $('Telegram Trigger').item.json.message.text }}",
+            "Content_from_llm": "={{ $json.output }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "topics",
+              "displayName": "topics",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Content_from_llm",
+              "displayName": "Content_from_llm",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -192,
+        -176
+      ],
+      "id": "884fd72f-0c57-4fbb-8645-c030b2f4d2b6",
+      "name": "Create a record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "WcRe6pRcMoQYHNvg",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.fields.Content_from_llm }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        16,
+        -176
+      ],
+      "id": "8d1c4f62-e087-45e6-80aa-9e15a803b376",
+      "name": "Send a text message",
+      "webhookId": "86f6ed51-0078-4f88-87b2-6c83b7680828",
+      "credentials": {
+        "telegramApi": {
+          "id": "qjXGXGdSmI8P4OUP",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b18c6627-1da9-4d58-b560-1fc52cf47ce4",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b135ec823519ecbcbd634298f9bbbc03049f17618f48c66cffdff848ae5dbae4"
+  },
+  "id": "86d6k3yAxMiFSObq",
+  "tags": []
+}
