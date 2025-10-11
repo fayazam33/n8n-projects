@@ -22,6 +22,6 @@ This workflow is an AI-powered chatbot that provides **market research insights 
 4. Activate the workflow and start your Telegram bot!
 
 ## 📝 Notes
-- All responses are generated in **Bangla**.
+- Response can be generated in **Bangla**.
 - You can adapt the system prompt to customize the style of insights.
 
