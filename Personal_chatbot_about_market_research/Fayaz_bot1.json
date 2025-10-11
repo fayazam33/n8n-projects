@@ -1,5 +1,5 @@
 {
-  "name": "Fayaz_bot",
+  "name": "Fayaz_bot1",
   "nodes": [
     {
       "parameters": {
@@ -11,12 +11,12 @@
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.2,
       "position": [
-        -768,
-        -176
+        -496,
+        -96
       ],
-      "id": "08043c23-ea50-4275-9abf-4a263217605c",
+      "id": "c364d9dd-354c-439d-8d0b-e98bbc6dd2b0",
       "name": "Telegram Trigger",
-      "webhookId": "77bc265f-0bf1-4d79-a9f9-26b7f8e63fe1",
+      "webhookId": "e2fac57f-99b3-4dd8-860d-5a141f73edea",
       "credentials": {
         "telegramApi": {
           "id": "qjXGXGdSmI8P4OUP",
@@ -27,18 +27,16 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=this is the user prompt context {{ $json.message.text }}",
-        "options": {
-          "systemMessage": "You are an AI-powered market research agent, designed specifically for Bangladeshi users.\nYour job is to gather, analyze, and summarize relevant market insights based on the user’s input topic. if anyone say hello start with Assalamualaikum greetings\nAll responses must be written in Bangla.\n\nYour answers should be clear, structured, and data-driven, focusing on the following key areas:\n\n🎯 Target Audience Analysis — Include demographics (age, gender, income, location), behaviors, interests, and pain points.\n\n🧭 Market Trends & Demand — Provide insights on the current market landscape in Bangladesh, growth potential, and future opportunities.\n\n🏆 Competitor Analysis — Identify key competitors, their offerings, pricing, marketing strategies, and weaknesses.\n\n💡 Key Insights & Recommendations — Deliver data-backed conclusions and practical action steps.\n\nAvoid unnecessary fluff. The response should be useful for business decision-making."
-        }
+        "text": "=This is the user prompt {{ $json.message.text }}",
+        "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        -544,
-        -176
+        -288,
+        -96
       ],
-      "id": "fe687027-ce8e-4eb8-80d0-59a1aa3542b5",
+      "id": "cb68e648-2770-4546-8ecc-f5e943813144",
       "name": "AI Agent"
     },
     {
@@ -48,10 +46,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        -688,
-        32
+        -432,
+        112
       ],
-      "id": "c0d2bb76-c0aa-44a6-9578-eee2ad73b61e",
+      "id": "8c74cfe5-9e01-43a9-beea-2b017e778ef6",
       "name": "Google Gemini Chat Model",
       "credentials": {
         "googlePalmApi": {
@@ -116,10 +114,10 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
-        -192,
-        -176
+        64,
+        -96
       ],
-      "id": "884fd72f-0c57-4fbb-8645-c030b2f4d2b6",
+      "id": "93ca67ff-2d34-4fe4-8546-319920758334",
       "name": "Create a record",
       "credentials": {
         "airtableTokenApi": {
@@ -137,16 +135,16 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        16,
-        -176
+        272,
+        -96
       ],
-      "id": "8d1c4f62-e087-45e6-80aa-9e15a803b376",
+      "id": "30d0b731-0d61-4b1a-8b44-a4903a574728",
       "name": "Send a text message",
-      "webhookId": "86f6ed51-0078-4f88-87b2-6c83b7680828",
+      "webhookId": "379dab5a-a08b-45f2-8297-5d62a838739c",
       "credentials": {
         "telegramApi": {
-          "id": "qjXGXGdSmI8P4OUP",
-          "name": "Telegram account"
+          "id": "Yy3A1X5pWzxW2gAa",
+          "name": "Telegram account 2"
         }
       }
     }
@@ -202,11 +200,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "b18c6627-1da9-4d58-b560-1fc52cf47ce4",
+  "versionId": "28f7e503-5c60-472a-aaf7-66daf7bc2fa8",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "b135ec823519ecbcbd634298f9bbbc03049f17618f48c66cffdff848ae5dbae4"
   },
-  "id": "86d6k3yAxMiFSObq",
+  "id": "xnEngfuhhvfurdEx",
   "tags": []
 }
