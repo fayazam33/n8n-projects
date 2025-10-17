@@ -4,7 +4,7 @@ This workflow automates newsletter creation using multiple AI agents coordinated
 It takes a topic and an email address as input, gathers recent articles, writes topic sections using **Google Gemini**, and compiles a full HTML newsletter automatically sent to the subscriber via Gmail.
 
 ---
-## demo video (./demo2.gif)
+## For demo video  go to (./demo2.gif)file
 
 ## 🚀 Features
 
