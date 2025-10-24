@@ -18,21 +18,12 @@ It automates receiving user queries, searching a vectorized knowledge base, gene
 
 
 User submits a query via the form (Name, Email, Phone, Query).
-
 Workflow triggers in n8n:
-
-Query is converted into a vector embedding (OpenAI).
-
-Pinecone vector store retrieves relevant context.
-
+Query is converted into a vector embedding (OpenAI). Pinecone vector store retrieves relevant context.
 AI Agent generates a precise answer using context and memory.
-
 User receives an email:
-
 Contains the AI-generated answer in a clean, structured format.
-
 Includes company contact info and support hours.
-
 Query is logged in Google Sheets / Database for future analysis.
 
 
@@ -54,6 +45,8 @@ You can see the sample pdf and text information of a company of mine name Shopif
 Google Drive Trigger → Search files → Split in Batches → Download → Embeddings OpenAI → Pinecone Vector Store
                                   ↘
                               Loop / NoOp (for batching)
+
+![Google Drive to Pinecone Workflow](images/Ai Agent Support.PNG)
 
 ### Workflow 2: User Query → AI Answer
 
