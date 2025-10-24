@@ -1,0 +1,417 @@
+{
+  "name": "customer_support2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "07e0c19b-23b3-4c1c-b390-606731b4ce9d",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -576,
+        -64
+      ],
+      "id": "055fa797-c590-49c0-8527-79e6766ade4c",
+      "name": "Webhook",
+      "webhookId": "07e0c19b-23b3-4c1c-b390-606731b4ce9d"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.query }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a helpful assistant. Use the context retrieved from the Pinecone Vector Store to answer the user's query. \nYou are a helpful assistant. Use the context retrieved from the Pinecone Vector Store to answer the user's query. Context: {{$json[\"toolResponse\"]}}\nIf the answer is not in the context, say to contact with support mail shopify@gmail.com\nProvide clear and concise answers. \n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -160,
+        -80
+      ],
+      "id": "90657adb-f91b-494e-a9b7-1a2e5bf511de",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -464,
+        192
+      ],
+      "id": "e81665f8-f136-4c55-a7fb-12e55170c975",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "qkZVwZ9HRwvd2gNw",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.email }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -304,
+        176
+      ],
+      "id": "d7f71c48-d3ff-4c33-aaa4-c195e51d980d",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "retrieve data when the user ask for relevant data about shopify ecommerce system and services of them and once the data is retrieve from answer",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8nrag",
+          "mode": "list",
+          "cachedResultName": "n8nrag"
+        },
+        "useReranker": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        -80,
+        176
+      ],
+      "id": "f6da5c8c-87ed-4f6f-a4be-e98d04925213",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "jv5cpu6SSePNcKMR",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -224,
+        352
+      ],
+      "id": "93865e4c-f0fc-48b8-9d6c-b7ddbebb2104",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "qkZVwZ9HRwvd2gNw",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d07c77d7-4e8d-4677-8b92-91326f56dc0b",
+              "name": "body.name",
+              "value": "={{ $json.body.name }}",
+              "type": "string"
+            },
+            {
+              "id": "d75189fd-032b-4528-8472-d117f3af921f",
+              "name": "body.email",
+              "value": "={{ $json.body.email }}",
+              "type": "string"
+            },
+            {
+              "id": "d7ec35b5-217c-49c1-ac67-d99e8e2935ff",
+              "name": "body.phone",
+              "value": "={{ $json.body.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "cde6fa08-7c09-431e-9e9b-8f0b34faf630",
+              "name": "body.query",
+              "value": "={{ $json.body.query }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -368,
+        -64
+      ],
+      "id": "d1b7488e-551c-4227-b42b-5abded48fdca",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        336
+      ],
+      "id": "61b0baac-0fdc-45f5-9ec4-c457f9fcce1d",
+      "name": "Reranker Cohere",
+      "credentials": {
+        "cohereApi": {
+          "id": "gLl8iQaICFeWiK27",
+          "name": "CohereApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Webhook').item.json.body.email }}",
+        "subject": "Your Query Answer",
+        "message": "=<div style=\"font-family: Arial, sans-serif; color: #333; background-color: #f7f7f7; padding: 20px;\">\n  <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 20px;\">\n    <h2 style=\"color: #008060; text-align: center;\">Shopify Support Response</h2>\n    <p>Hi {{ $('Webhook').item.json.body.name }},</p>\n\n    <p>Thank you for reaching out to Shopify Support. Here’s the response to your query:</p>\n\n    <div style=\"background-color: #f0f7f5; padding: 15px; border-left: 4px solid #008060; margin: 15px 0;\">\n      <p style=\"white-space: pre-line;\">{{ $('AI Agent').item.json.output }}</p>\n    </div>\n\n    <p>We hope this resolves your issue. If you need more help, just reply to this email or visit our <a href=\"https://www.shopify.com\" style=\"color: #008060; text-decoration: none;\">Support Center</a>.</p>\n\n    <p style=\"margin-top: 30px; font-size: 14px; color: #666;\">Best regards,<br><strong>Team Shopify</strong><br>support@shopify.com</p>\n  </div>\n</div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        192,
+        -80
+      ],
+      "id": "6beeb939-d4af-4e7a-9c66-39ad03fd667e",
+      "name": "Send a message",
+      "webhookId": "78049a95-9be4-4c70-8d8a-3a3bbbefe234",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "001W5v0wUiNidcTa",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "15kWixLqn_I7oQg1NeEqSx9gMBlnFO5Je03K2uFW7CM4",
+          "mode": "list",
+          "cachedResultName": "Query_details",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15kWixLqn_I7oQg1NeEqSx9gMBlnFO5Je03K2uFW7CM4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15kWixLqn_I7oQg1NeEqSx9gMBlnFO5Je03K2uFW7CM4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Date": "={{ $now }}",
+            "Name": "={{ $('Webhook').item.json.body.name }}",
+            "Email": "={{ $('Webhook').item.json.body.email }}",
+            "Query ": "={{ $('Webhook').item.json.body.query }}",
+            "Ans": "={{ $('AI Agent').item.json.output }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Query ",
+              "displayName": "Query ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Ans",
+              "displayName": "Ans",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        400,
+        -80
+      ],
+      "id": "25def8ff-79b8-4085-80f4-45f597e6c2ea",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Px7lpMjtG0nrvhMJ",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reranker Cohere": {
+      "ai_reranker": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_reranker",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9506b28f-dd60-41da-ba27-c2ce98875e5d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b135ec823519ecbcbd634298f9bbbc03049f17618f48c66cffdff848ae5dbae4"
+  },
+  "id": "sgiXKQm1ktX2ytTj",
+  "tags": []
+}
