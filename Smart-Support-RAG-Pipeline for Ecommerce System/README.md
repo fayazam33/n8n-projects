@@ -46,7 +46,7 @@ Google Drive Trigger → Search files → Split in Batches → Download → Embe
                                   ↘
                               Loop / NoOp (for batching)
 
-![Google Drive to Pinecone Workflow](images/Ai Agent Support.PNG)
+![Google Drive to Pinecone Workflow](./Ai Agent Support.PNG)
 
 ### Workflow 2: User Query → AI Answer
 
