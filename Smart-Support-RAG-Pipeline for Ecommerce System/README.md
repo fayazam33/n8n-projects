@@ -46,7 +46,8 @@ Google Drive Trigger → Search files → Split in Batches → Download → Embe
                                   ↘
                               Loop / NoOp (for batching)
 
-(./Smart-Support-RAG-Pipeline for Ecommerce System/AI Agent Support.PNG)
+![Google Drive to Pinecone Workflow](./Smart-Support-RAG-Pipeline%20for%20Ecommerce%20System/AI%20Agent%20Support.PNG)
+
 
 ### Workflow 2: User Query → AI Answer
 
