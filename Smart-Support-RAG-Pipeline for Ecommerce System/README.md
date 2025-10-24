@@ -46,7 +46,7 @@ Google Drive Trigger → Search files → Split in Batches → Download → Embe
                                   ↘
                               Loop / NoOp (for batching)
 
-![Google Drive to Pinecone Workflow](./Smart-Support-RAG-Pipeline for Ecommerce System/Building The Rag Agent.PNG)
+(see the Building The Rag Agent.PNG)
 
 
 ### Workflow 2: User Query → AI Answer
@@ -56,6 +56,8 @@ Lovable AI Form → Webhook (n8n) → OpenAI Embeddings → Pinecone Vector Stor
                                          ↘
                                       Simple Memory
 
+
+(see the Ai Agent Support.PNG) on my folder
 ## ⚠️ Important Note
 ## To use this project, you must add your own API keys for OpenAI, Pinecone, and any email service.
 
