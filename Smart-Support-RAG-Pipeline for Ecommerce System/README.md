@@ -41,6 +41,9 @@ You can see the sample pdf and text information of a company of mine name Shopif
 - **Lovable AI** – Form frontend and submission interface
 
 ---
+
+### The Support page of shopify ---https://shopify-customer-support.lovable.app/
+
 ### Workflow 1: Google Drive → Pinecone Update
 Google Drive Trigger → Search files → Split in Batches → Download → Embeddings OpenAI → Pinecone Vector Store
                                   ↘
