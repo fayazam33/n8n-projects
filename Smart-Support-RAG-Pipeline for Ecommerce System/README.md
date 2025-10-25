@@ -13,7 +13,7 @@ It automates receiving user queries, searching a vectorized knowledge base, gene
 - **Email Notifications**: Automatically sends AI-generated responses to the user’s email.
 - **Query Logging**: Saves all queries and responses in Google Sheets / Database for analytics.
 - **Simple Memory**: Keeps track of user sessions to maintain context for multiple queries.
-
+### My Youtube video channel - https://youtu.be/oV1Wh5X_mRg
 ---
 
 
